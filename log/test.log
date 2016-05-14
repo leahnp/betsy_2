@@ -1,0 +1,1427 @@
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.9ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (0.7ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (0.7ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (0.8ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (0.9ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Dicta In Quaerat Eius Ducimus Quisquam 0' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Minima numquam quibusdam enim aliquam omnis fuga. Consequatur vero consectetur nobis dolor ea voluptatibus facilis. Qui sequi modi omnis. Aliquam excepturi porro sit mollitia tenetur fuga nihil."], ["created_at", "2016-04-25 22:47:12.389388"], ["title", "Dicta In Quaerat Eius Ducimus Quisquam 0"], ["updated_at", "2016-04-25 22:47:12.389388"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Started GET "/articles/1" for 127.0.0.1 at 2016-04-25 15:47:12 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 1]]
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  Rendered articles/show.html.erb within layouts/application (32.8ms)
+Completed 200 OK in 320ms (Views: 318.3ms | ActiveRecord: 1.1ms)
+Started POST "/comments" for 127.0.0.1 at 2016-04-25 15:47:12 -0700
+Processing by CommentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "comment"=>{"author_name"=>"Cowboy", "body"=>"Testing is too hard.", "article_id"=>"1"}, "commit"=>"Save"}
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 1], ["author_name", "Cowboy"], ["body", "Testing is too hard."], ["created_at", "2016-04-25 22:47:12.747605"], ["updated_at", "2016-04-25 22:47:12.747605"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Redirected to http://www.example.com/articles/1
+Completed 302 Found in 6ms (ActiveRecord: 1.4ms)
+Started GET "/articles/1" for 127.0.0.1 at 2016-04-25 15:47:12 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 1]]
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  Rendered articles/show.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 7ms (Views: 6.2ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.8ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.6ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (0.5ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (0.5ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.6ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (0.6ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (0.5ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+Started GET "/" for 127.0.0.1 at 2016-04-25 15:47:12 -0700
+Processing by DashboardController#show as HTML
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments"[0m
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5[0m
+  Rendered dashboard/show.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 8ms (Views: 5.0ms | ActiveRecord: 0.8ms)
+  [1m[35m (0.7ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (0.5ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (0.7ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (0.5ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (0.5ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Title 0' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Aperiam maiores id repudiandae quis. Illum voluptatem id odio fugiat ut vel. Omnis necessitatibus eveniet. Ipsam ut non. Nostrum quos quam culpa."], ["created_at", "2016-04-25 22:47:12.793594"], ["title", "Title 0"], ["updated_at", "2016-04-25 22:47:12.793594"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Title 1' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Quis consequatur fugiat ab molestias eligendi libero labore. Aut modi corporis blanditiis quidem neque et deleniti. Sit possimus voluptas provident expedita molestiae. Laboriosam quo eos impedit rerum et. Harum molestiae quae consequatur est optio vel est."], ["created_at", "2016-04-25 22:47:12.797101"], ["title", "Title 1"], ["updated_at", "2016-04-25 22:47:12.797101"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Title 2' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Quo reiciendis aperiam accusantium ut. Consequatur est nisi facilis. Fugiat voluptatem doloribus et a enim."], ["created_at", "2016-04-25 22:47:12.800099"], ["title", "Title 2"], ["updated_at", "2016-04-25 22:47:12.800099"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (2.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Title 3' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Voluptas perspiciatis et voluptatem laborum quo. Culpa itaque ab est. Molestiae natus nemo repellat. Quia molestias error delectus soluta. Et temporibus nesciunt sint."], ["created_at", "2016-04-25 22:47:12.805294"], ["title", "Title 3"], ["updated_at", "2016-04-25 22:47:12.805294"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Title 4' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Saepe sed excepturi sint molestiae est inventore. Distinctio cupiditate consequuntur id quasi voluptas. Temporibus saepe impedit. Ipsam doloremque eos non vel ducimus."], ["created_at", "2016-04-25 22:47:12.808620"], ["title", "Title 4"], ["updated_at", "2016-04-25 22:47:12.808620"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.2ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Title 5' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Doloribus voluptate optio sunt. Quod accusamus voluptatem id hic sed dolores. Suscipit in reprehenderit. Voluptas impedit animi quidem autem ut sint deleniti."], ["created_at", "2016-04-25 22:47:12.813308"], ["title", "Title 5"], ["updated_at", "2016-04-25 22:47:12.813308"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+Started GET "/" for 127.0.0.1 at 2016-04-25 15:47:12 -0700
+Processing by DashboardController#show as HTML
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "articles"[0m
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 2]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 3]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 4]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 5]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 6]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments"[0m
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5[0m
+  Rendered dashboard/show.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 10ms (Views: 2.8ms | ActiveRecord: 1.3ms)
+  [1m[35m (0.9ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.6ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (0.6ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (0.7ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (0.6ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (0.5ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+  [1m[36mAuthor Load (0.3ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Title 0' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Recusandae laudantium esse autem. Quia similique optio. Odio tenetur sit. Placeat neque voluptatem voluptas in sint. Voluptatem labore rerum aut sed commodi."], ["created_at", "2016-04-25 22:47:12.841228"], ["title", "Title 0"], ["updated_at", "2016-04-25 22:47:12.841228"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Title 1' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Consequatur temporibus sit doloribus dolor fuga non quisquam. Reiciendis sapiente harum earum voluptas tempore. Beatae non esse facilis quaerat quam quis consequatur."], ["created_at", "2016-04-25 22:47:12.844560"], ["title", "Title 1"], ["updated_at", "2016-04-25 22:47:12.844560"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Title 2' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Qui dolor ut itaque qui voluptatem non fugit. Nam est aut est fugiat consequuntur. Aut ut iure accusantium ipsam voluptatem. Voluptatem odio quisquam vero sit corporis eius."], ["created_at", "2016-04-25 22:47:12.849691"], ["title", "Title 2"], ["updated_at", "2016-04-25 22:47:12.849691"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Title 3' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Dolorem et earum nam assumenda vero reiciendis. Ratione assumenda praesentium incidunt et commodi facere perferendis. Labore autem iusto laudantium nulla qui assumenda excepturi. Eius id et."], ["created_at", "2016-04-25 22:47:12.852728"], ["title", "Title 3"], ["updated_at", "2016-04-25 22:47:12.852728"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Title 4' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Quibusdam aspernatur aperiam. Ratione natus repellat praesentium sit sed dolores qui. Sequi ut animi dolores ullam quis. Cumque architecto saepe id aperiam vero. Neque nihil eum."], ["created_at", "2016-04-25 22:47:12.856917"], ["title", "Title 4"], ["updated_at", "2016-04-25 22:47:12.856917"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.2ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Title 5' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Est voluptate voluptatem maiores doloribus totam ratione dicta. Rerum quod odit sed fugit. Culpa qui optio sed voluptatum provident quidem veniam."], ["created_at", "2016-04-25 22:47:12.860339"], ["title", "Title 5"], ["updated_at", "2016-04-25 22:47:12.860339"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+Started GET "/" for 127.0.0.1 at 2016-04-25 15:47:12 -0700
+Processing by DashboardController#show as HTML
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "articles"[0m
+  [1m[35mArticle Load (0.5ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 2]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 3]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 4]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 5]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 6]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments"[0m
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5[0m
+  Rendered dashboard/show.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 10ms (Views: 2.7ms | ActiveRecord: 1.6ms)
+  [1m[35m (1.0ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.9ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (0.8ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (0.8ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (0.6ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (1.0ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Laudantium Voluptates Illum Temporibus Facere Rerum 1' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Id et qui aut enim nulla doloremque qui. Non corrupti autem sint consequatur. Quisquam sed delectus placeat aliquid cumque. Error est deleniti odio."], ["created_at", "2016-04-25 22:47:12.887918"], ["title", "Laudantium Voluptates Illum Temporibus Facere Rerum 1"], ["updated_at", "2016-04-25 22:47:12.887918"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 1], ["author_name", "Ms. Neoma Bruen"], ["body", "Body 0"], ["created_at", "2016-04-25 22:47:12.890431"], ["updated_at", "2016-04-25 22:47:12.890431"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Ut Corrupti Quo Officia Est Consequuntur 2' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Eaque sequi culpa laboriosam cumque molestiae tempora. Veritatis et perspiciatis magni deleniti libero magnam tempore. Consequatur eligendi unde officiis voluptatem eveniet provident."], ["created_at", "2016-04-25 22:47:12.893774"], ["title", "Ut Corrupti Quo Officia Est Consequuntur 2"], ["updated_at", "2016-04-25 22:47:12.893774"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 2], ["author_name", "Jermaine Hand I"], ["body", "Body 1"], ["created_at", "2016-04-25 22:47:12.895656"], ["updated_at", "2016-04-25 22:47:12.895656"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Suscipit Animi Ut Earum Repudiandae Et 3' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Quibusdam velit est commodi ipsam explicabo. Totam quisquam et. Porro enim qui eos."], ["created_at", "2016-04-25 22:47:12.898647"], ["title", "Suscipit Animi Ut Earum Repudiandae Et 3"], ["updated_at", "2016-04-25 22:47:12.898647"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 3], ["author_name", "Elliott Senger"], ["body", "Body 2"], ["created_at", "2016-04-25 22:47:12.900720"], ["updated_at", "2016-04-25 22:47:12.900720"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Aut Magnam Nemo Et Debitis Aut 4' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Magnam commodi sunt aperiam rerum. Qui aut sunt. Officia est sed et et vero ex minus."], ["created_at", "2016-04-25 22:47:12.904186"], ["title", "Aut Magnam Nemo Et Debitis Aut 4"], ["updated_at", "2016-04-25 22:47:12.904186"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 4], ["author_name", "Conner Mosciski"], ["body", "Body 3"], ["created_at", "2016-04-25 22:47:12.905994"], ["updated_at", "2016-04-25 22:47:12.905994"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Occaecati Asperiores Aperiam Accusantium Eos Rerum 5' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Assumenda provident aut esse. Beatae velit eius modi quia fugiat nisi repellat. Ut voluptas debitis in est nihil facilis. Minus nobis molestiae vero illum magni."], ["created_at", "2016-04-25 22:47:12.909491"], ["title", "Occaecati Asperiores Aperiam Accusantium Eos Rerum 5"], ["updated_at", "2016-04-25 22:47:12.909491"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 5], ["author_name", "Morgan Keeling"], ["body", "Body 4"], ["created_at", "2016-04-25 22:47:12.911629"], ["updated_at", "2016-04-25 22:47:12.911629"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Eos Itaque Debitis Iste Rerum Ducimus 6' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Perferendis dignissimos sunt rem et debitis. Ducimus tenetur error asperiores. Rem voluptate in unde illum. Pariatur omnis dolores reprehenderit. Qui natus ut ipsam reiciendis pariatur commodi."], ["created_at", "2016-04-25 22:47:12.915122"], ["title", "Eos Itaque Debitis Iste Rerum Ducimus 6"], ["updated_at", "2016-04-25 22:47:12.915122"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 6], ["author_name", "Ms. Kay Olson"], ["body", "Body 5"], ["created_at", "2016-04-25 22:47:12.916964"], ["updated_at", "2016-04-25 22:47:12.916964"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+Started GET "/" for 127.0.0.1 at 2016-04-25 15:47:12 -0700
+Processing by DashboardController#show as HTML
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 2]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 3]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 4]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 5]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 6]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments"[0m
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 6]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered dashboard/show.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 15ms (Views: 7.8ms | ActiveRecord: 1.6ms)
+  [1m[36m (0.8ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.6ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.5ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.5ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.5ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.5ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.5ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Molestiae Fuga Possimus Qui Autem Molestias 7' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Non odio dolorem qui cumque. Quidem necessitatibus aperiam excepturi et vel. Nostrum tempora sit est fugiat qui exercitationem. Blanditiis beatae quas."], ["created_at", "2016-04-25 22:47:12.949290"], ["title", "Molestiae Fuga Possimus Qui Autem Molestias 7"], ["updated_at", "2016-04-25 22:47:12.949290"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 1], ["author_name", "Jean Sauer"], ["body", "Body 0"], ["created_at", "2016-04-25 22:47:12.952153"], ["updated_at", "2016-04-25 22:47:12.952153"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Rerum Repellendus Dolores Sint Quia Quod 8' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Velit et blanditiis animi quas occaecati id. Repudiandae quibusdam quis consequatur nesciunt dolorum. Qui tempora vitae sed doloribus ex. Illo animi consequatur nesciunt est vel. Consectetur architecto ut pariatur qui itaque odio quo."], ["created_at", "2016-04-25 22:47:12.957967"], ["title", "Rerum Repellendus Dolores Sint Quia Quod 8"], ["updated_at", "2016-04-25 22:47:12.957967"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 2], ["author_name", "Alvina Abbott"], ["body", "Body 1"], ["created_at", "2016-04-25 22:47:12.960033"], ["updated_at", "2016-04-25 22:47:12.960033"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.4ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Est Nisi Ea Itaque Possimus Sed 9' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Suscipit aut quasi libero temporibus. Voluptatem omnis beatae a. Ab quia quibusdam."], ["created_at", "2016-04-25 22:47:12.964618"], ["title", "Est Nisi Ea Itaque Possimus Sed 9"], ["updated_at", "2016-04-25 22:47:12.964618"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 3], ["author_name", "Miss Greyson King"], ["body", "Body 2"], ["created_at", "2016-04-25 22:47:12.967585"], ["updated_at", "2016-04-25 22:47:12.967585"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Beatae Commodi Molestias Cupiditate Possimus Dolor 10' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Quis fugiat error molestiae nihil eligendi itaque. Tempora ratione enim numquam quas ut exercitationem. Distinctio aut cupiditate beatae provident aspernatur sit dolore. Quae expedita ut et dolor quaerat."], ["created_at", "2016-04-25 22:47:12.970716"], ["title", "Beatae Commodi Molestias Cupiditate Possimus Dolor 10"], ["updated_at", "2016-04-25 22:47:12.970716"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 4], ["author_name", "Andre Stokes"], ["body", "Body 3"], ["created_at", "2016-04-25 22:47:12.972500"], ["updated_at", "2016-04-25 22:47:12.972500"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Voluptatem Non Suscipit Odit Veniam Voluptatum 11' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "In totam dolor nostrum. Consectetur qui eum nobis vel numquam laudantium. Et ut sit itaque aut consectetur velit. Nihil eos et autem aut sequi provident. Qui amet occaecati omnis nesciunt odit soluta."], ["created_at", "2016-04-25 22:47:12.976012"], ["title", "Voluptatem Non Suscipit Odit Veniam Voluptatum 11"], ["updated_at", "2016-04-25 22:47:12.976012"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 5], ["author_name", "Petra Kuvalis"], ["body", "Body 4"], ["created_at", "2016-04-25 22:47:12.978212"], ["updated_at", "2016-04-25 22:47:12.978212"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Omnis Culpa Expedita Nostrum Totam Non 12' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Facilis voluptas quia mollitia rerum qui iste vel. Impedit ipsa iure ut autem suscipit. Sapiente id et deleniti et repellendus."], ["created_at", "2016-04-25 22:47:12.981429"], ["title", "Omnis Culpa Expedita Nostrum Totam Non 12"], ["updated_at", "2016-04-25 22:47:12.981429"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 6], ["author_name", "Greg Schimmel"], ["body", "Body 5"], ["created_at", "2016-04-25 22:47:12.983359"], ["updated_at", "2016-04-25 22:47:12.983359"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+Started GET "/" for 127.0.0.1 at 2016-04-25 15:47:12 -0700
+Processing by DashboardController#show as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 4]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 5]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 6]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"[0m
+  [1m[35mComment Load (0.1ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mComment Load (0.1ms)[0m  SELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 6]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered dashboard/show.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 14ms (Views: 5.8ms | ActiveRecord: 1.5ms)
+  [1m[35m (0.8ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.6ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (0.6ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (0.6ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.5ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (0.5ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (0.8ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Est Voluptas Et Repellat Consequatur Minus 13' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Sit aut laboriosam ut. Corporis voluptatibus perspiciatis rerum placeat totam. Vel odit dolorem fugiat possimus perferendis. Voluptates labore eum. Nemo praesentium molestiae quas blanditiis."], ["created_at", "2016-04-25 22:47:13.012659"], ["title", "Est Voluptas Et Repellat Consequatur Minus 13"], ["updated_at", "2016-04-25 22:47:13.012659"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Rem Vel Illo Tenetur Et Et 14' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Id placeat sunt aut illum quod. Ipsum et sint dolorem vitae molestiae et distinctio. Est minus expedita error veritatis sint autem. Ut molestias voluptatibus sapiente aspernatur rem. Ut deleniti eligendi atque corporis."], ["created_at", "2016-04-25 22:47:13.015869"], ["title", "Rem Vel Illo Tenetur Et Et 14"], ["updated_at", "2016-04-25 22:47:13.015869"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Started GET "/" for 127.0.0.1 at 2016-04-25 15:47:13 -0700
+Processing by DashboardController#show as HTML
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 2]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments"[0m
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mComment Load (0.3ms)[0m  [1mSELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5[0m
+  Rendered dashboard/show.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 8ms (Views: 3.5ms | ActiveRecord: 1.0ms)
+  [1m[35m (0.7ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.6ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (0.5ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (1.0ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.3ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (0.8ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (1.2ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Quo Aut Consequatur Quia Et Voluptatum 15' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Architecto modi explicabo nobis eveniet sequi et consequuntur. Culpa necessitatibus ut doloremque blanditiis ut. Reprehenderit itaque maiores occaecati ex repellendus ab. Quis magnam molestias ut aut perferendis tenetur quia. Fugit at corporis asperiores quas dolorem dicta."], ["created_at", "2016-04-25 22:47:13.039342"], ["title", "Quo Aut Consequatur Quia Et Voluptatum 15"], ["updated_at", "2016-04-25 22:47:13.039342"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 1], ["author_name", "Dakota VonRueden"], ["body", "Aspernatur quis id commodi in ut. Est iusto accusamus. Mollitia architecto quae. Aliquam perferendis voluptatem."], ["created_at", "2016-04-25 22:47:13.041764"], ["updated_at", "2016-04-25 22:47:13.041764"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Autem Similique Unde Porro Debitis Dolorum 16' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Fuga unde suscipit ut vel. Aut et non recusandae magnam. Sed iure qui."], ["created_at", "2016-04-25 22:47:13.045581"], ["title", "Autem Similique Unde Porro Debitis Dolorum 16"], ["updated_at", "2016-04-25 22:47:13.045581"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 2], ["author_name", "Javier Willms"], ["body", "Enim in iure velit rerum delectus quia. Ut error ut illum sint excepturi odit. Maiores repellendus aut. Earum dolorem ea illum saepe eius voluptates neque."], ["created_at", "2016-04-25 22:47:13.047531"], ["updated_at", "2016-04-25 22:47:13.047531"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'In Porro Vero Voluptas Cumque Quo 17' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Dicta sint delectus iusto. Magnam fugiat quo voluptates maxime sunt et. Aut tempore dolorem. Maxime aperiam consequatur aut laudantium voluptatum sint."], ["created_at", "2016-04-25 22:47:13.050853"], ["title", "In Porro Vero Voluptas Cumque Quo 17"], ["updated_at", "2016-04-25 22:47:13.050853"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 3], ["author_name", "Gustave Mante"], ["body", "Molestiae ad similique eum consequatur. Ea animi veritatis nemo hic aspernatur aliquam velit. Voluptatem voluptatum autem voluptas possimus voluptates eligendi eos."], ["created_at", "2016-04-25 22:47:13.052842"], ["updated_at", "2016-04-25 22:47:13.052842"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Natus Autem Atque Necessitatibus Pariatur Ea 18' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Ex aspernatur autem non et. Error dicta animi ab quisquam. Est eos in illum mollitia enim accusantium."], ["created_at", "2016-04-25 22:47:13.056240"], ["title", "Natus Autem Atque Necessitatibus Pariatur Ea 18"], ["updated_at", "2016-04-25 22:47:13.056240"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 4], ["author_name", "Uriel Walsh"], ["body", "Vel dignissimos autem ad odit vel magni. Aut sunt amet hic odio. Suscipit impedit officia. Expedita at dolor sit."], ["created_at", "2016-04-25 22:47:13.058229"], ["updated_at", "2016-04-25 22:47:13.058229"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Rerum Ullam Est Saepe Eligendi Aut 19' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Et aut non officiis qui dolor iure dolor. Laudantium ut perferendis assumenda temporibus. Animi et quia expedita. Et aut ducimus temporibus velit."], ["created_at", "2016-04-25 22:47:13.061594"], ["title", "Rerum Ullam Est Saepe Eligendi Aut 19"], ["updated_at", "2016-04-25 22:47:13.061594"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 5], ["author_name", "Mrs. Francesco Larson"], ["body", "Blanditiis dolores quibusdam nostrum perferendis at. Eum nostrum facere quaerat recusandae nihil. Dolorem itaque excepturi esse. Maxime sit molestiae omnis voluptate."], ["created_at", "2016-04-25 22:47:13.063596"], ["updated_at", "2016-04-25 22:47:13.063596"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Started GET "/" for 127.0.0.1 at 2016-04-25 15:47:13 -0700
+Processing by DashboardController#show as HTML
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 2]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 3]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 4]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 5]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"[0m
+  [1m[35mComment Load (0.1ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mComment Load (0.1ms)[0m  SELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered dashboard/show.html.erb within layouts/application (6.5ms)
+Completed 200 OK in 15ms (Views: 7.3ms | ActiveRecord: 1.5ms)
+  [1m[35m (1.0ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.8ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (0.7ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (0.8ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.8ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (0.7ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.2ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (0.6ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+  [1m[36mAuthor Load (0.3ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Qui Voluptatem Consequatur Fugiat Ipsum Magni 20' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Four score and seven years..."], ["created_at", "2016-04-25 22:47:13.094988"], ["title", "Qui Voluptatem Consequatur Fugiat Ipsum Magni 20"], ["updated_at", "2016-04-25 22:47:13.094988"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Started GET "/" for 127.0.0.1 at 2016-04-25 15:47:13 -0700
+Processing by DashboardController#show as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5[0m
+  Rendered dashboard/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 5ms (Views: 1.7ms | ActiveRecord: 0.6ms)
+  [1m[35m (1.3ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.9ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (1.0ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (1.3ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (0.5ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (0.5ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Velit Deleniti Dolorum Ratione Ipsa Quas 21' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Non ratione nisi voluptatem. Et est velit debitis sit. Libero quisquam magni ad excepturi. Qui vel et quas dolore iusto."], ["created_at", "2016-04-25 22:47:13.114975"], ["title", "Velit Deleniti Dolorum Ratione Ipsa Quas 21"], ["updated_at", "2016-04-25 22:47:13.114975"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 1], ["author_name", "Mara Rath"], ["body", "I think that..."], ["created_at", "2016-04-25 22:47:13.117556"], ["updated_at", "2016-04-25 22:47:13.117556"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Started GET "/" for 127.0.0.1 at 2016-04-25 15:47:13 -0700
+Processing by DashboardController#show as HTML
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"[0m
+  [1m[35mComment Load (0.1ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mComment Load (0.1ms)[0m  SELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered dashboard/show.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 6ms (Views: 2.9ms | ActiveRecord: 0.8ms)
+  [1m[35m (0.7ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.5ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (0.5ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (0.6ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.5ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (0.9ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (0.9ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Et Et Optio Sed Quaerat Maxime 22' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Four score and seven years..."], ["created_at", "2016-04-25 22:47:13.139783"], ["title", "Et Et Optio Sed Quaerat Maxime 22"], ["updated_at", "2016-04-25 22:47:13.139783"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 1], ["author_name", "Mrs. Florian Mayert"], ["body", "I think that..."], ["created_at", "2016-04-25 22:47:13.142419"], ["updated_at", "2016-04-25 22:47:13.142419"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Started GET "/" for 127.0.0.1 at 2016-04-25 15:47:13 -0700
+Processing by DashboardController#show as HTML
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"[0m
+  [1m[35mComment Load (0.1ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mComment Load (0.1ms)[0m  SELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered dashboard/show.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 5ms (Views: 2.3ms | ActiveRecord: 0.8ms)
+  [1m[35m (1.2ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.2ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.9ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (0.9ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.2ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (1.3ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.2ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.8ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (1.1ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.2ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (0.9ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.2ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Nobis Qui Et Repudiandae Qui Commodi 23' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Sunt consequatur voluptas vero et quae aliquam et. Id dolorem consequuntur et. Doloremque voluptates cupiditate nostrum. Dolores unde praesentium porro ab. Ut sed praesentium dolores labore ratione officia occaecati."], ["created_at", "2016-04-25 22:47:13.168913"], ["title", "Nobis Qui Et Repudiandae Qui Commodi 23"], ["updated_at", "2016-04-25 22:47:13.168913"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.9ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Eveniet Esse Neque Est Commodi Non 24' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Commodi ullam labore debitis laudantium et nisi. Illum possimus saepe perferendis dignissimos ipsum velit ut. Officia quia nisi sit quis. Blanditiis cupiditate voluptatem aut mollitia optio."], ["created_at", "2016-04-25 22:47:13.174111"], ["title", "Eveniet Esse Neque Est Commodi Non 24"], ["updated_at", "2016-04-25 22:47:13.174111"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Repellendus Esse Voluptas Et Reiciendis Consequatur 25' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Quod dolores non qui veniam earum delectus. Nam voluptatibus laborum minima. Id ut iste deserunt."], ["created_at", "2016-04-25 22:47:13.177582"], ["title", "Repellendus Esse Voluptas Et Reiciendis Consequatur 25"], ["updated_at", "2016-04-25 22:47:13.177582"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Rerum Vel Odio Quasi Voluptatibus At 26' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Quos porro soluta occaecati quo nisi nihil. Quis sit aut ipsum esse aspernatur provident. Et minus sint mollitia qui sint excepturi."], ["created_at", "2016-04-25 22:47:13.181884"], ["title", "Rerum Vel Odio Quasi Voluptatibus At 26"], ["updated_at", "2016-04-25 22:47:13.181884"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 2], ["author_name", "Lysanne Schroeder"], ["body", "Molestiae eaque quis eos saepe maiores exercitationem qui. Omnis doloremque autem necessitatibus dolorem. Fuga qui asperiores."], ["created_at", "2016-04-25 22:47:13.184601"], ["updated_at", "2016-04-25 22:47:13.184601"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Started GET "/" for 127.0.0.1 at 2016-04-25 15:47:13 -0700
+Processing by DashboardController#show as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 4]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"[0m
+  [1m[35mComment Load (0.1ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mComment Load (0.1ms)[0m  SELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered dashboard/show.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 10ms (Views: 3.3ms | ActiveRecord: 1.2ms)
+  [1m[35m (1.2ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.3ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (1.2ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (0.8ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (1.1ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.8ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (0.8ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (0.7ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Deleniti Aut Asperiores Porro Eaque Nemo 27' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Ducimus id ab voluptatum consectetur sed. Placeat temporibus est ducimus laudantium. Sunt quidem ducimus quibusdam fugit. Illo consequatur velit eius sequi rerum."], ["created_at", "2016-04-25 22:47:13.211818"], ["title", "Deleniti Aut Asperiores Porro Eaque Nemo 27"], ["updated_at", "2016-04-25 22:47:13.211818"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE ("articles"."title" IS NULL AND "articles"."id" != 1) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" IS NULL LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.0ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (1.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAuthor Load (0.3ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.2ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Consequuntur Et Laborum Voluptatem Vel Quidem 28' LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Sunt nemo omnis quidem quas corrupti. Eaque optio rerum. Dolorem ratione occaecati. Quo qui dolores corrupti quas perspiciatis. Minima enim vel mollitia."], ["created_at", "2016-04-25 22:47:13.226283"], ["title", "Consequuntur Et Laborum Voluptatem Vel Quidem 28"], ["updated_at", "2016-04-25 22:47:13.226283"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE ("articles"."title" = 'Consequuntur Et Laborum Voluptatem Vel Quidem 28' AND "articles"."id" != 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" IS NULL LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.9ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.5ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Exercitationem Est Nisi Ipsam Labore Dolorem 29' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Consequatur sit porro provident et aut assumenda. Explicabo nisi et rem. Saepe facere voluptatem ut sapiente. Voluptatem corrupti ab aut. Modi vitae qui laudantium dolores quo aliquam."], ["created_at", "2016-04-25 22:47:13.248969"], ["title", "Exercitationem Est Nisi Ipsam Labore Dolorem 29"], ["updated_at", "2016-04-25 22:47:13.248969"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE ("articles"."title" = 'Exercitationem Est Nisi Ipsam Labore Dolorem 29' AND "articles"."id" != 1) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Exercitationem Est Nisi Ipsam Labore Dolorem 29' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Perspiciatis Optio Id Dolorum Enim Et 30' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Est vitae deserunt. Eaque ullam sit tenetur. Adipisci possimus eveniet esse voluptas hic ducimus. Aut deserunt id officia veniam sit numquam autem. Consectetur nam voluptas sint quasi amet eos rerum."], ["created_at", "2016-04-25 22:47:13.258258"], ["title", "Perspiciatis Optio Id Dolorum Enim Et 30"], ["updated_at", "2016-04-25 22:47:13.258258"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.4ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Consequuntur Nam Quis Est Sit Repellat 31' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Totam ad a provident quo. Asperiores qui et veniam labore sit cumque. Accusamus maxime reiciendis. Omnis eius quia consequuntur. Omnis enim nobis at recusandae esse."], ["created_at", "2016-04-25 22:47:13.263847"], ["title", "Consequuntur Nam Quis Est Sit Repellat 31"], ["updated_at", "2016-04-25 22:47:13.263847"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.5ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles"."id" FROM "articles"
+  [1m[36mArticle Load (0.0ms)[0m  [1mSELECT "articles"."id" FROM "articles"[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Natus Et Et Aut Voluptatem Rerum 32' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Eius ut aut voluptatem consequatur quas sed et. Quam voluptas natus cupiditate. Molestiae tempore aliquid quis est repudiandae doloribus rerum. Ut ex ipsum adipisci omnis dolor iusto. Aut qui doloremque ut voluptates saepe a."], ["created_at", "2016-04-25 22:47:13.273883"], ["title", "Natus Et Et Aut Voluptatem Rerum 32"], ["updated_at", "2016-04-25 22:47:13.273883"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE ("articles"."title" IS NULL AND "articles"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.5ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Amet Eligendi Numquam Voluptatum Aspernatur Est 33' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Consequuntur at quia distinctio omnis corrupti consequatur. Velit ea neque ut. Consectetur voluptatem amet. Deserunt facilis perferendis temporibus aperiam cum. Odio labore libero."], ["created_at", "2016-04-25 22:47:13.283255"], ["title", "Amet Eligendi Numquam Voluptatum Aspernatur Est 33"], ["updated_at", "2016-04-25 22:47:13.283255"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Quia Corporis Exercitationem Necessitatibus Nisi Velit 34' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Saepe omnis commodi maiores dolore. Vel eum totam. Velit eos voluptatem quia dolorem nihil facilis. Dolorem quia nam id qui unde et. Sequi expedita praesentium commodi temporibus deserunt."], ["created_at", "2016-04-25 22:47:13.286972"], ["title", "Quia Corporis Exercitationem Necessitatibus Nisi Velit 34"], ["updated_at", "2016-04-25 22:47:13.286972"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Consequatur Ratione Enim Et Cupiditate Explicabo 35' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Sint non excepturi quidem. Animi id voluptatem veniam. Voluptate mollitia iusto eaque facilis odio."], ["created_at", "2016-04-25 22:47:13.289867"], ["title", "Consequatur Ratione Enim Et Cupiditate Explicabo 35"], ["updated_at", "2016-04-25 22:47:13.289867"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'A Fuga Recusandae Incidunt Eveniet Enim 36' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Sint aliquid maiores qui dolorem cum quae officiis. Porro eveniet sunt deleniti itaque eum. Sequi reprehenderit eum assumenda voluptas ut labore. Eveniet aperiam reprehenderit aut aliquam facere."], ["created_at", "2016-04-25 22:47:13.292805"], ["title", "A Fuga Recusandae Incidunt Eveniet Enim 36"], ["updated_at", "2016-04-25 22:47:13.292805"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Et Dolores Eos Quia Repellat Et 37' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Exercitationem soluta est. Ullam et odio accusantium. Aliquid quasi minus ad quam necessitatibus qui."], ["created_at", "2016-04-25 22:47:13.295208"], ["title", "Et Dolores Eos Quia Repellat Et 37"], ["updated_at", "2016-04-25 22:47:13.295208"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Sit Atque Qui Ut Et Similique 38' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Voluptate odit ex. In et ratione voluptates amet aut. Aut minus nemo qui eum dicta voluptas. Nam fugit sit. Dolore architecto expedita nam."], ["created_at", "2016-04-25 22:47:13.297335"], ["title", "Sit Atque Qui Ut Et Similique 38"], ["updated_at", "2016-04-25 22:47:13.297335"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "articles"  LIMIT 5) subquery_for_count
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.0ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (1.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mAuthor Load (0.3ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Delectus Consequatur Fugit Et Asperiores Molestiae 39' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "I think that..."], ["created_at", "2016-04-25 22:47:13.306959"], ["title", "Delectus Consequatur Fugit Et Asperiores Molestiae 39"], ["updated_at", "2016-04-25 22:47:13.306959"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Consectetur Architecto Dignissimos Modi Ut Ducimus 40' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "I think that..."], ["created_at", "2016-04-25 22:47:13.309909"], ["title", "Consectetur Architecto Dignissimos Modi Ut Ducimus 40"], ["updated_at", "2016-04-25 22:47:13.309909"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.8ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Perspiciatis Aliquid Doloribus Qui Et Dolorem 41' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Four score and seven years ago..."], ["created_at", "2016-04-25 22:47:13.316788"], ["title", "Perspiciatis Aliquid Doloribus Qui Et Dolorem 41"], ["updated_at", "2016-04-25 22:47:13.316788"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.0ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.0ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.4ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.2ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Architecto Nemo Enim Sunt Corrupti Quidem 42' LIMIT 1
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Et nihil repellendus. Reprehenderit optio aut omnis molestias sed dolor. Quisquam harum dolores culpa enim. Et voluptatem quibusdam."], ["created_at", "2016-04-25 22:47:13.322192"], ["title", "Architecto Nemo Enim Sunt Corrupti Quidem 42"], ["updated_at", "2016-04-25 22:47:13.322192"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Aut Incidunt Quod Quis At Provident 43' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Aut illum occaecati animi ab accusantium ut dicta. Vel aperiam ab suscipit. Quod iusto quas sint tempora."], ["created_at", "2016-04-25 22:47:13.326219"], ["title", "Aut Incidunt Quod Quis At Provident 43"], ["updated_at", "2016-04-25 22:47:13.326219"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Et Modi Sit Quia Praesentium Non 44' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Omnis harum consectetur et aperiam. Nihil ipsa nobis velit et non repellat dolorum. Facilis hic ullam aut. Quos pariatur sit eos consequuntur. Quo architecto commodi molestiae ut dolorem."], ["created_at", "2016-04-25 22:47:13.328591"], ["title", "Et Modi Sit Quia Praesentium Non 44"], ["updated_at", "2016-04-25 22:47:13.328591"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mArticle Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Dolorem Quia Perspiciatis Sed Sit Eos 45' LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Debitis quod modi illo et et nam voluptas. Voluptas sed harum ipsum provident qui molestiae mollitia. Nesciunt consequatur ea quia laborum nihil quos amet. Ea et minima ipsa modi eveniet error."], ["created_at", "2016-04-25 22:47:13.330581"], ["title", "Dolorem Quia Perspiciatis Sed Sit Eos 45"], ["updated_at", "2016-04-25 22:47:13.330581"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.0ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Perferendis Soluta Voluptas Nesciunt Qui Aut 46' LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Dignissimos id et. Sed fugiat deleniti. Dolore iure ipsa culpa harum modi. Molestiae aut iusto quibusdam architecto alias deleniti quasi. Rerum modi omnis et sequi vitae."], ["created_at", "2016-04-25 22:47:13.332529"], ["title", "Perferendis Soluta Voluptas Nesciunt Qui Aut 46"], ["updated_at", "2016-04-25 22:47:13.332529"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mArticle Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Magni Dolores Rem Assumenda Labore Enim 47' LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Dolor incidunt non dolorum. Consequatur similique earum. Sit qui eum dolore molestias."], ["created_at", "2016-04-25 22:47:13.334335"], ["title", "Magni Dolores Rem Assumenda Labore Enim 47"], ["updated_at", "2016-04-25 22:47:13.334335"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mComment Load (0.0ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 2], ["author_name", "Coralie Wintheiser"], ["body", "Unde pariatur eum voluptatem aspernatur eius. Quae fuga magni et sit. Nulla nihil non error possimus impedit."], ["created_at", "2016-04-25 22:47:13.335775"], ["updated_at", "2016-04-25 22:47:13.335775"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 4]]
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 5]]
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 6]]
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+  [1m[36m (0.4ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2016-04-25 22:47:13.352232"], ["name", "tag_0"], ["updated_at", "2016-04-25 22:47:13.352232"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Quis Est Numquam Exercitationem Iste Omnis 48' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "In aut placeat soluta nisi. Neque nulla enim similique porro tempore voluptas magni. Impedit eos vel ab ea nihil. Odit soluta eligendi. Ut labore laborum totam rerum aliquam voluptas."], ["created_at", "2016-04-25 22:47:13.355339"], ["title", "Quis Est Numquam Exercitationem Iste Omnis 48"], ["updated_at", "2016-04-25 22:47:13.355339"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Numquam Ea Laboriosam Doloribus Blanditiis Voluptas 49' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Repellendus eaque hic cupiditate asperiores voluptatem ducimus eos. Est et quos voluptatem aut sit qui neque. Nesciunt error maiores. Et vitae et eius. Est qui modi."], ["created_at", "2016-04-25 22:47:13.358042"], ["title", "Numquam Ea Laboriosam Doloribus Blanditiis Voluptas 49"], ["updated_at", "2016-04-25 22:47:13.358042"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles" INNER JOIN "taggings" ON "articles"."id" = "taggings"."article_id" WHERE "taggings"."tag_id" = ?  [["tag_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 1 AND "taggings"."tag_id" = 1) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 1], ["created_at", "2016-04-25 22:47:13.366242"], ["tag_id", 1], ["updated_at", "2016-04-25 22:47:13.366242"]]
+  [1m[35mTagging Exists (0.2ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 2 AND "taggings"."tag_id" = 1) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 2], ["created_at", "2016-04-25 22:47:13.369108"], ["tag_id", 1], ["updated_at", "2016-04-25 22:47:13.369108"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT  "tags".* FROM "tags"  WHERE "tags"."name" = 'tag_0' LIMIT 1[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles" INNER JOIN "taggings" ON "articles"."id" = "taggings"."article_id" WHERE "taggings"."tag_id" = ?  [["tag_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2016-04-25 22:47:13.383247"], ["name", "tag_1"], ["updated_at", "2016-04-25 22:47:13.383247"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT  "tags".* FROM "tags"  WHERE "tags"."name" = 'tag_1_no_exist' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+  [1m[36m (0.6ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Provident Reiciendis Sit Delectus Ex Omnis 50' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Quisquam consequatur omnis totam. Sunt sit sint nobis est rerum. Consectetur qui at molestiae voluptas ipsa aliquid quisquam."], ["created_at", "2016-04-25 22:47:13.390358"], ["title", "Provident Reiciendis Sit Delectus Ex Omnis 50"], ["updated_at", "2016-04-25 22:47:13.390358"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 1], ["author_name", "Marjory Ondricka"], ["body", "Veniam beatae at. Sint reprehenderit quia. Accusantium sed a. Repudiandae commodi voluptate ea esse."], ["created_at", "2016-04-25 22:47:13.392226"], ["updated_at", "2016-04-25 22:47:13.392226"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Voluptas Cupiditate Voluptatem Recusandae Qui Perspiciatis 51' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Tempore veniam odio tenetur maxime. Soluta cupiditate accusamus voluptates quo quae facere suscipit. Voluptatum amet et quia."], ["created_at", "2016-04-25 22:47:13.398220"], ["title", "Voluptas Cupiditate Voluptatem Recusandae Qui Perspiciatis 51"], ["updated_at", "2016-04-25 22:47:13.398220"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 1], ["author_name", "Naomie Simonis I"], ["body", "Quo facere sunt aut omnis eveniet accusamus. Rerum molestias rerum qui aut. Dolores quae sit neque voluptatem voluptates aperiam sit. Aperiam minus dolores voluptatem consectetur excepturi."], ["created_at", "2016-04-25 22:47:13.399425"], ["updated_at", "2016-04-25 22:47:13.399425"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM "articles";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'articles';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "authors";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'authors';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM "comments";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'comments';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "taggings";[0m
+  [1m[35m (0.0ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'taggings';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "tags";
+  [1m[36m (0.0ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'tags';
+  [1m[36m (0.7ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mAuthor Load (0.1ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Hic Sit Voluptatum Eaque Ullam Cum 52' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["body", "Sint modi velit voluptas ad. Excepturi ad repellendus quisquam officiis culpa et. Magni consequuntur ullam sunt eum optio id sunt. Omnis aut et nihil et nam ad reiciendis. Sunt sed pariatur illo cupiditate assumenda aut."], ["created_at", "2016-04-25 22:47:13.404952"], ["title", "Hic Sit Voluptatum Eaque Ullam Cum 52"], ["updated_at", "2016-04-25 22:47:13.404952"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 1], ["author_name", "Arch Waters"], ["body", "Omnis repudiandae iste est. Numquam beatae tempora. Aut ut ut. Consequatur et autem deleniti architecto voluptas et. Amet est iusto."], ["created_at", "2016-04-25 22:47:13.406101"], ["updated_at", "2016-04-25 22:47:13.406101"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.7ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Qui Possimus Incidunt Ipsam Quam In 53' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Qui error aut magnam omnis nesciunt possimus. Vero numquam nemo eveniet neque aut. Laudantium a vel ad totam dignissimos ducimus dolorem."], ["created_at", "2016-04-25 22:47:13.412290"], ["title", "Qui Possimus Incidunt Ipsam Quam In 53"], ["updated_at", "2016-04-25 22:47:13.412290"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 1], ["author_name", "Alisa Conn"], ["body", "Minus voluptatem quasi a et officiis totam eum. Non velit voluptates ut eius. Quia aut quod quisquam ut totam sit ratione."], ["created_at", "2016-04-25 22:47:13.413402"], ["updated_at", "2016-04-25 22:47:13.413402"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mAuthor Load (0.3ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Soluta Dolores Rerum Non Iusto Eligendi 54' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Possimus quia molestias blanditiis aut. Quaerat placeat illo totam ea praesentium dignissimos. Cum dolor est iste rerum vel voluptatem nesciunt."], ["created_at", "2016-04-25 22:47:13.418649"], ["title", "Soluta Dolores Rerum Non Iusto Eligendi 54"], ["updated_at", "2016-04-25 22:47:13.418649"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 2], ["author_name", "Dr. Eliezer MacGyver"], ["body", "Natus itaque dolorem quo nihil ea. Inventore asperiores in laboriosam illum ipsa nulla ipsam. Temporibus sit neque. Ea consequuntur ipsa qui. Rerum sint vel optio."], ["created_at", "2016-04-25 22:47:13.420457"], ["updated_at", "2016-04-25 22:47:13.420457"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Modi Quia Eum Assumenda Sed Harum 55' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Quisquam iusto a exercitationem eveniet blanditiis. Officia et itaque ut quia. Iusto quas quidem perferendis corrupti. Distinctio dicta iusto."], ["created_at", "2016-04-25 22:47:13.424871"], ["title", "Modi Quia Eum Assumenda Sed Harum 55"], ["updated_at", "2016-04-25 22:47:13.424871"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 3], ["author_name", "Laura Grant Jr."], ["body", "Nihil asperiores eligendi minus. Dolores mollitia ut. Pariatur et at. Quis exercitationem est sit voluptatum et distinctio dolores. Dolores deserunt facere molestias deleniti qui."], ["created_at", "2016-04-25 22:47:13.426128"], ["updated_at", "2016-04-25 22:47:13.426128"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.2ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Quisquam Harum Voluptatem Iure Pariatur Quas 56' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Velit qui incidunt molestiae laboriosam. Ipsa asperiores consequatur quibusdam mollitia quisquam. Perspiciatis voluptatem inventore nisi illum voluptatem dolorem officiis. Nobis praesentium esse culpa. Aspernatur et ut dolorem qui facere."], ["created_at", "2016-04-25 22:47:13.430870"], ["title", "Quisquam Harum Voluptatem Iure Pariatur Quas 56"], ["updated_at", "2016-04-25 22:47:13.430870"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 4], ["author_name", "Dorcas Ratke"], ["body", "Rerum doloribus est qui. Alias unde sint aliquam ipsam repellendus inventore. Itaque aliquid voluptatem. Eveniet minus totam repudiandae a. Aut animi sequi consectetur earum et."], ["created_at", "2016-04-25 22:47:13.433501"], ["updated_at", "2016-04-25 22:47:13.433501"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Fugit Veniam Natus At Quas Sit 57' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Ducimus perferendis porro consequatur. Voluptatem eligendi aut ad sequi laudantium rerum dolores. Consectetur reiciendis aut voluptas."], ["created_at", "2016-04-25 22:47:13.438755"], ["title", "Fugit Veniam Natus At Quas Sit 57"], ["updated_at", "2016-04-25 22:47:13.438755"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 5], ["author_name", "Nathanial Jacobi"], ["body", "Repudiandae quo aut ipsa corporis voluptas. Consequatur ea qui illo est magnam temporibus. Debitis ullam quia aut iusto et consequuntur molestias. Commodi omnis sit quis hic fugiat consequuntur."], ["created_at", "2016-04-25 22:47:13.440561"], ["updated_at", "2016-04-25 22:47:13.440561"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Vel Iste At Magni Id Tempora 58' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Totam magni aspernatur dolor nulla voluptatem. Voluptatum est reiciendis sint. Placeat saepe reiciendis aliquam eum adipisci. Est aut maxime distinctio qui sequi incidunt eveniet. Fugiat minus sed vel accusamus dolorum dolor ducimus."], ["created_at", "2016-04-25 22:47:13.444504"], ["title", "Vel Iste At Magni Id Tempora 58"], ["updated_at", "2016-04-25 22:47:13.444504"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 6], ["author_name", "Ms. Margret Bergnaum"], ["body", "Eum accusantium ea error et. Soluta totam modi. Id nam ipsam vel."], ["created_at", "2016-04-25 22:47:13.445984"], ["updated_at", "2016-04-25 22:47:13.445984"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "comments"  LIMIT 5) subquery_for_count
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.0ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.0ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.0ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.0ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.7ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Velit Ex Laborum Doloremque Quisquam Maxime 59' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Nihil occaecati amet nemo id est. Repellat quaerat et quia. Quaerat iusto incidunt et qui deserunt. Eaque voluptate libero nostrum. Dolorem quasi sit accusantium omnis eum."], ["created_at", "2016-04-25 22:47:13.453704"], ["title", "Velit Ex Laborum Doloremque Quisquam Maxime 59"], ["updated_at", "2016-04-25 22:47:13.453704"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 1], ["author_name", "Cristobal DuBuque"], ["body", "I think that..."], ["created_at", "2016-04-25 22:47:13.454906"], ["updated_at", "2016-04-25 22:47:13.454906"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Et Occaecati Quia Error Quidem Ullam 60' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Ratione hic consequatur. Beatae explicabo qui deleniti corrupti aut enim. Rem sequi laudantium accusamus velit porro. Quis nihil provident id dolor nihil dolorum voluptatem."], ["created_at", "2016-04-25 22:47:13.457526"], ["title", "Et Occaecati Quia Error Quidem Ullam 60"], ["updated_at", "2016-04-25 22:47:13.457526"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 2], ["author_name", "Edwin Purdy"], ["body", "I think that..."], ["created_at", "2016-04-25 22:47:13.458573"], ["updated_at", "2016-04-25 22:47:13.458573"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mComment Load (0.1ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.0ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.0ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.8ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Est Magnam Occaecati Nobis Ut Tempora 61' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Four score and seven years ago..."], ["created_at", "2016-04-25 22:47:13.464505"], ["title", "Est Magnam Occaecati Nobis Ut Tempora 61"], ["updated_at", "2016-04-25 22:47:13.464505"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.0ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.0ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.0ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.0ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2016-04-25 22:47:13.469764"], ["name", "tag_2"], ["updated_at", "2016-04-25 22:47:13.469764"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.2ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.0ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.0ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.5ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2016-04-25 22:47:13.475491"], ["name", "tag_3"], ["updated_at", "2016-04-25 22:47:13.475491"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.4ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Suscipit Et Quos Quis Voluptatum Natus 62' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Fugiat sint est temporibus perspiciatis nemo et ullam. Dolorem voluptatibus quam quia. Qui aperiam nobis quidem temporibus sint."], ["created_at", "2016-04-25 22:47:13.482545"], ["title", "Suscipit Et Quos Quis Voluptatum Natus 62"], ["updated_at", "2016-04-25 22:47:13.482545"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2016-04-25 22:47:13.483635"], ["name", "tag_4"], ["updated_at", "2016-04-25 22:47:13.483635"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 1 AND "taggings"."tag_id" = 1) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 1], ["created_at", "2016-04-25 22:47:13.487535"], ["tag_id", 1], ["updated_at", "2016-04-25 22:47:13.487535"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles" INNER JOIN "taggings" ON "articles"."id" = "taggings"."article_id" WHERE "taggings"."tag_id" = ? AND "articles"."id" = 1 LIMIT 1  [["tag_id", 1]]
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.5ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2016-04-25 22:47:13.494221"], ["name", "tag_5"], ["updated_at", "2016-04-25 22:47:13.494221"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2016-04-25 22:47:13.499259"], ["name", "tag_6"], ["updated_at", "2016-04-25 22:47:13.499259"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.0ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.5ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mAuthor Load (0.1ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Et Natus Provident Fugiat Ducimus Facilis 63' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Natus impedit tempora sunt eum. Dolores rerum cum soluta id. Quo quidem est consequatur et enim et aut. Quia ea ratione nulla saepe. Cupiditate at et fugit magnam."], ["created_at", "2016-04-25 22:47:13.505587"], ["title", "Et Natus Provident Fugiat Ducimus Facilis 63"], ["updated_at", "2016-04-25 22:47:13.505587"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.5ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 1 AND "taggings"."tag_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 1], ["created_at", "2016-04-25 22:47:13.510975"], ["tag_id", 2], ["updated_at", "2016-04-25 22:47:13.510975"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 1 AND "taggings"."tag_id" = 3) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.0ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.0ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.5ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 1 AND "taggings"."tag_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 1], ["created_at", "2016-04-25 22:47:13.515826"], ["tag_id", 2], ["updated_at", "2016-04-25 22:47:13.515826"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 1 AND "taggings"."tag_id" = 2) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "articles";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'articles';[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "authors";
+  [1m[36m (0.1ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'authors';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "comments";[0m
+  [1m[35m (0.1ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.0ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'comments';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM "taggings";
+  [1m[36m (0.0ms)[0m  [1mSELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';[0m
+  [1m[35m (0.0ms)[0m  DELETE FROM sqlite_sequence where name = 'taggings';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "tags";[0m
+  [1m[35m (0.0ms)[0m  SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM sqlite_sequence where name = 'tags';[0m
+  [1m[35m (0.3ms)[0m  rollback transaction

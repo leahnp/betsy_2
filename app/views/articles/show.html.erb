@@ -1,0 +1,14 @@
+<h1><%= @article.title %></h1>
+<h4>Published <%= @article.created_at %></h4>
+<p class='tag_list'><em>Tagged:</em> <%= @article.tag_list %></p>
+
+<p><%= @article.body %></p>
+
+
+<div class='article_actions'>
+  <%= edit_icon(@article, "Edit") %>
+  <%= delete_icon(@article, "Delete") %>
+  <%= link_to "Back to All Articles", articles_path  %>
+</div>
+
+<%= render partial: 'comments' %>

@@ -1,0 +1,671 @@
+  [1m[36m (1.4ms)[0m  [1mCREATE TABLE "articles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "body" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "author_id" integer) [0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "authors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone_number" varchar(255), "email" varchar(255), "website" varchar(255), "twitter" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "article_id" integer, "author_name" varchar(255), "body" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.8ms)[0m  CREATE TABLE "taggings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "article_id" integer, "tag_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (1.3ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.8ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130408190802')
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120107162506')[0m
+  [1m[35m (0.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120108231244')
+  [1m[36m (0.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120108231255')[0m
+  [1m[35m (0.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120108231301')
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130408172034')[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "articles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "body" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "author_id" integer) 
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "authors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "phone_number" varchar(255), "email" varchar(255), "website" varchar(255), "twitter" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.9ms)[0m  CREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "article_id" integer, "author_name" varchar(255), "body" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "taggings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "article_id" integer, "tag_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.8ms)[0m  CREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (1.3ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130408190802')[0m
+  [1m[35m (0.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120107162506')
+  [1m[36m (0.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120108231244')[0m
+  [1m[35m (0.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120108231255')
+  [1m[36m (0.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120108231301')[0m
+  [1m[35m (0.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130408172034')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "authors" ("created_at", "email", "name", "phone_number", "twitter", "updated_at", "website") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["created_at", "2016-04-25 22:46:31.742684"], ["email", "pfannerstill.alberto@koelpin.info"], ["name", "Alberto Pfannerstill"], ["phone_number", "522.826.4616"], ["twitter", "alberto_pfannerstill"], ["updated_at", "2016-04-25 22:46:31.742684"], ["website", "http://www.stiedemann.net"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "authors" ("created_at", "email", "name", "phone_number", "twitter", "updated_at", "website") VALUES (?, ?, ?, ?, ?, ?, ?)  [["created_at", "2016-04-25 22:46:31.747612"], ["email", "lee_orn@hammesherman.net"], ["name", "Lee Orn"], ["phone_number", "667.763.5426"], ["twitter", "lee_orn"], ["updated_at", "2016-04-25 22:46:31.747612"], ["website", "http://www.mills.net"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "authors" ("created_at", "email", "name", "phone_number", "twitter", "updated_at", "website") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["created_at", "2016-04-25 22:46:31.750466"], ["email", "jalen_gislason_mr@jacobsonmcclure.net"], ["name", "Mr. Jalen Gislason"], ["phone_number", "(571) 924-9370 x2386"], ["twitter", "mr_gislason_jalen"], ["updated_at", "2016-04-25 22:46:31.750466"], ["website", "http://www.williamson.net"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "authors" ("created_at", "email", "name", "phone_number", "twitter", "updated_at", "website") VALUES (?, ?, ?, ?, ?, ?, ?)  [["created_at", "2016-04-25 22:46:31.752863"], ["email", "batz_ms_bettye@johnson.net"], ["name", "Ms. Bettye Batz"], ["phone_number", "1-203-084-1287"], ["twitter", "bettye_batz_ms"], ["updated_at", "2016-04-25 22:46:31.752863"], ["website", "http://www.mitchell.biz"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "authors" ("created_at", "email", "name", "phone_number", "twitter", "updated_at", "website") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["created_at", "2016-04-25 22:46:31.755082"], ["email", "bailey_aliyah@ziemeconn.biz"], ["name", "Aliyah Bailey"], ["phone_number", "(814) 565-8285 x447"], ["twitter", "bailey_aliyah"], ["updated_at", "2016-04-25 22:46:31.755082"], ["website", "http://www.reichel.org"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "authors" ("created_at", "email", "name", "phone_number", "twitter", "updated_at", "website") VALUES (?, ?, ?, ?, ?, ?, ?)  [["created_at", "2016-04-25 22:46:31.757534"], ["email", "emmerich_damien@ebert.net"], ["name", "Damien Emmerich"], ["phone_number", "163.022.5672"], ["twitter", "damien_emmerich"], ["updated_at", "2016-04-25 22:46:31.757534"], ["website", "http://www.cartwrightcasper.name"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "authors" ("created_at", "email", "name", "phone_number", "twitter", "updated_at", "website") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["created_at", "2016-04-25 22:46:31.760464"], ["email", "gutkowski_linwood@grady.net"], ["name", "Linwood Gutkowski"], ["phone_number", "(818) 444-5989 x456"], ["twitter", "gutkowski_linwood"], ["updated_at", "2016-04-25 22:46:31.760464"], ["website", "http://www.corwin.biz"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "authors" ("created_at", "email", "name", "phone_number", "twitter", "updated_at", "website") VALUES (?, ?, ?, ?, ?, ?, ?)  [["created_at", "2016-04-25 22:46:31.762866"], ["email", "horace.hermann@gulgowskikiehn.org"], ["name", "Horace Hermann"], ["phone_number", "934-428-0827 x866"], ["twitter", "hermann_horace"], ["updated_at", "2016-04-25 22:46:31.762866"], ["website", "http://www.ebert.biz"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "authors" ("created_at", "email", "name", "phone_number", "twitter", "updated_at", "website") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["created_at", "2016-04-25 22:46:31.765084"], ["email", "reid_kozey@casper.com"], ["name", "Reid Kozey"], ["phone_number", "(562) 659-8864 x4901"], ["twitter", "kozey_reid"], ["updated_at", "2016-04-25 22:46:31.765084"], ["website", "http://www.kautzer.name"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "authors" ("created_at", "email", "name", "phone_number", "twitter", "updated_at", "website") VALUES (?, ?, ?, ?, ?, ?, ?)  [["created_at", "2016-04-25 22:46:31.767554"], ["email", "maximilian.keeling@bode.net"], ["name", "Maximilian Keeling"], ["phone_number", "293-590-0132 x2811"], ["twitter", "keeling_maximilian"], ["updated_at", "2016-04-25 22:46:31.767554"], ["website", "http://www.zboncakwisoky.info"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2016-04-25 22:46:31.772538"], ["name", "tag_0"], ["updated_at", "2016-04-25 22:46:31.772538"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2016-04-25 22:46:31.774361"], ["name", "tag_1"], ["updated_at", "2016-04-25 22:46:31.774361"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2016-04-25 22:46:31.776250"], ["name", "tag_2"], ["updated_at", "2016-04-25 22:46:31.776250"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2016-04-25 22:46:31.778184"], ["name", "tag_3"], ["updated_at", "2016-04-25 22:46:31.778184"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2016-04-25 22:46:31.779814"], ["name", "tag_4"], ["updated_at", "2016-04-25 22:46:31.779814"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2016-04-25 22:46:31.781797"], ["name", "tag_5"], ["updated_at", "2016-04-25 22:46:31.781797"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2016-04-25 22:46:31.783647"], ["name", "tag_6"], ["updated_at", "2016-04-25 22:46:31.783647"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2016-04-25 22:46:31.785435"], ["name", "tag_7"], ["updated_at", "2016-04-25 22:46:31.785435"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2016-04-25 22:46:31.787276"], ["name", "tag_8"], ["updated_at", "2016-04-25 22:46:31.787276"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tags" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2016-04-25 22:46:31.788987"], ["name", "tag_9"], ["updated_at", "2016-04-25 22:46:31.788987"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.2ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Et Dolore Numquam Ut Dolorum Debitis 0' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "articles" ("author_id", "body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["author_id", 9], ["body", "Provident atque quam. Et pariatur unde placeat reiciendis aut quaerat minima. Explicabo recusandae rerum culpa temporibus minima et et. Voluptatibus aliquid beatae distinctio possimus. Soluta sed officiis veniam dolore explicabo."], ["created_at", "2016-04-25 22:46:31.811284"], ["title", "Et Dolore Numquam Ut Dolorum Debitis 0"], ["updated_at", "2016-04-25 22:46:31.811284"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36mTag Load (0.2ms)[0m  [1mSELECT "tags".* FROM "tags"[0m
+  [1m[35mTag Load (0.2ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?  [["article_id", 1]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mTagging Exists (0.2ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 1 AND "taggings"."tag_id" = 10) LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 1], ["created_at", "2016-04-25 22:46:31.835128"], ["tag_id", 10], ["updated_at", "2016-04-25 22:46:31.835128"]]
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 1 AND "taggings"."tag_id" = 2) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 1], ["created_at", "2016-04-25 22:46:31.837974"], ["tag_id", 2], ["updated_at", "2016-04-25 22:46:31.837974"]]
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 1 AND "taggings"."tag_id" = 5) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 1], ["created_at", "2016-04-25 22:46:31.840044"], ["tag_id", 5], ["updated_at", "2016-04-25 22:46:31.840044"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE ("articles"."title" = 'Et Dolore Numquam Ut Dolorum Debitis 0' AND "articles"."id" != 1) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "articles" SET "created_at" = ?, "updated_at" = ? WHERE "articles"."id" = 1[0m  [["created_at", "2016-04-19 11:46:31.811284"], ["updated_at", "2016-04-25 22:46:31.843108"]]
+  [1m[35m (1.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 1], ["author_name", "Ms. Shawn Corwin"], ["body", "Ut est expedita repudiandae natus. Consequatur cumque molestias ut. Rem sint aut fugiat quas nemo."], ["created_at", "2016-04-21 01:46:31.811284"], ["updated_at", "2016-04-25 22:46:31.852700"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 1], ["author_name", "Alanna Kessler"], ["body", "Dicta rem molestiae explicabo quaerat. Perspiciatis et est magni temporibus. Suscipit est perferendis."], ["created_at", "2016-04-22 08:46:31.811284"], ["updated_at", "2016-04-25 22:46:31.856115"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 1], ["author_name", "Hilda Batz"], ["body", "Eius veniam illum excepturi consectetur quia. Dolores aliquam laboriosam minus saepe excepturi. Ratione numquam exercitationem dolor delectus. Eos quia magnam saepe rerum."], ["created_at", "2016-04-21 09:46:31.811284"], ["updated_at", "2016-04-25 22:46:31.859352"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 1], ["author_name", "Muhammad Schuppe"], ["body", "Non magni voluptas. Et voluptatem quisquam velit reprehenderit accusantium cumque. Ipsa nihil dolorum. Saepe nihil facilis id aut quae."], ["created_at", "2016-04-22 05:46:31.811284"], ["updated_at", "2016-04-25 22:46:31.862364"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.5ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Sed Expedita Fugiat Perferendis Sit Et 1' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "articles" ("author_id", "body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?, ?)  [["author_id", 7], ["body", "Magnam aut amet repellendus. Pariatur molestiae inventore ut. Inventore culpa consequuntur omnis dolorum ratione quo animi. Modi facilis voluptatem dolorem sit et cum sapiente. Consequatur qui qui aliquid voluptates quo odio."], ["created_at", "2016-04-25 22:46:31.868535"], ["title", "Sed Expedita Fugiat Perferendis Sit Et 1"], ["updated_at", "2016-04-25 22:46:31.868535"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?  [["article_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mTagging Exists (0.2ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 2 AND "taggings"."tag_id" = 7) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 2], ["created_at", "2016-04-25 22:46:31.876065"], ["tag_id", 7], ["updated_at", "2016-04-25 22:46:31.876065"]]
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 2 AND "taggings"."tag_id" = 2) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 2], ["created_at", "2016-04-25 22:46:31.878679"], ["tag_id", 2], ["updated_at", "2016-04-25 22:46:31.878679"]]
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 2 AND "taggings"."tag_id" = 1) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 2], ["created_at", "2016-04-25 22:46:31.880967"], ["tag_id", 1], ["updated_at", "2016-04-25 22:46:31.880967"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.2ms)[0m  SELECT  1 AS one FROM "articles"  WHERE ("articles"."title" = 'Sed Expedita Fugiat Perferendis Sit Et 1' AND "articles"."id" != 2) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "articles" SET "created_at" = ?, "updated_at" = ? WHERE "articles"."id" = 2[0m  [["created_at", "2016-04-17 01:46:31.868535"], ["updated_at", "2016-04-25 22:46:31.884322"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 2], ["author_name", "Miss Heidi O'Keefe"], ["body", "Voluptatum accusantium et qui consequatur vero itaque. Eum impedit doloribus aperiam et. Voluptas occaecati cumque ratione fugit. Atque debitis enim qui exercitationem est perspiciatis."], ["created_at", "2016-04-18 19:46:31.868535"], ["updated_at", "2016-04-25 22:46:31.887344"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 2], ["author_name", "Miss Isabell Veum"], ["body", "Consequatur omnis fugit sunt aut non. Autem placeat ipsum. Velit sunt officia. Labore magni eligendi id."], ["created_at", "2016-04-19 13:46:31.868535"], ["updated_at", "2016-04-25 22:46:31.889632"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 2], ["author_name", "Myrtis Toy"], ["body", "Neque maxime ab. Sit officia enim voluptatum. Eos dolor tempore."], ["created_at", "2016-04-19 09:46:31.868535"], ["updated_at", "2016-04-25 22:46:31.891672"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Similique Excepturi Autem Quis Est Laudantium 2' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("author_id", "body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["author_id", 2], ["body", "Sunt sit necessitatibus nam consequatur animi. Omnis eveniet in eaque sint dignissimos enim. Esse ea qui ratione sapiente distinctio quos illum."], ["created_at", "2016-04-25 22:46:31.895000"], ["title", "Similique Excepturi Autem Quis Est Laudantium 2"], ["updated_at", "2016-04-25 22:46:31.895000"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 3]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 3 AND "taggings"."tag_id" = 4) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 3], ["created_at", "2016-04-25 22:46:31.898598"], ["tag_id", 4], ["updated_at", "2016-04-25 22:46:31.898598"]]
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 3 AND "taggings"."tag_id" = 9) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 3], ["created_at", "2016-04-25 22:46:31.900011"], ["tag_id", 9], ["updated_at", "2016-04-25 22:46:31.900011"]]
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 3 AND "taggings"."tag_id" = 8) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 3], ["created_at", "2016-04-25 22:46:31.901283"], ["tag_id", 8], ["updated_at", "2016-04-25 22:46:31.901283"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE ("articles"."title" = 'Similique Excepturi Autem Quis Est Laudantium 2' AND "articles"."id" != 3) LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE "articles" SET "created_at" = ?, "updated_at" = ? WHERE "articles"."id" = 3  [["created_at", "2016-04-14 21:46:31.895000"], ["updated_at", "2016-04-25 22:46:31.903802"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 3], ["author_name", "Barbara Koss V"], ["body", "Consequatur commodi ea reprehenderit a et. Autem et esse quisquam minus tempora. Maiores accusamus quidem dolorem amet ratione ut. Et et laboriosam quo aut exercitationem voluptatem voluptas. Est sed saepe quod."], ["created_at", "2016-04-18 05:46:31.895000"], ["updated_at", "2016-04-25 22:46:31.908622"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 3], ["author_name", "Mattie Hills"], ["body", "Non tempore voluptatem corporis odit deserunt. Et excepturi doloribus. Esse quidem sapiente est architecto sint. Voluptas eligendi ducimus illum. Ipsa tempora quisquam consequuntur et."], ["created_at", "2016-04-16 04:46:31.895000"], ["updated_at", "2016-04-25 22:46:31.912414"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 3], ["author_name", "Krystel Kuvalis"], ["body", "Accusamus expedita doloribus error omnis ut. Sit qui iusto molestiae saepe numquam quam. Quibusdam et vel est."], ["created_at", "2016-04-14 21:46:31.895000"], ["updated_at", "2016-04-25 22:46:31.915441"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 3], ["author_name", "Pamela Sporer"], ["body", "Voluptas corporis quas quis rerum sequi. Voluptates fuga id incidunt impedit perferendis. Error iste natus exercitationem. Ut veritatis fugiat."], ["created_at", "2016-04-18 10:46:31.895000"], ["updated_at", "2016-04-25 22:46:31.918677"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 3], ["author_name", "Hubert Bosco"], ["body", "Quo beatae tenetur commodi ut. Itaque sint tempore debitis quia deserunt. Et occaecati ab dolor quibusdam."], ["created_at", "2016-04-17 02:46:31.895000"], ["updated_at", "2016-04-25 22:46:31.921163"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 3], ["author_name", "Ms. Hassie Kshlerin"], ["body", "Quia qui officiis perferendis accusamus distinctio sunt iste. Neque ut ut quibusdam cupiditate. Sed placeat molestiae aliquam ut. Veritatis nemo nesciunt quas ullam."], ["created_at", "2016-04-15 07:46:31.895000"], ["updated_at", "2016-04-25 22:46:31.923310"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Facilis Autem Voluptatem Facere Consectetur Illum 3' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "articles" ("author_id", "body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["author_id", 8], ["body", "Veniam et inventore. Et amet sed debitis ab consequatur ducimus tempora. Quisquam ex dolore et at laborum ullam. Illo in sed vel. Quae nam eligendi incidunt."], ["created_at", "2016-04-25 22:46:31.926627"], ["title", "Facilis Autem Voluptatem Facere Consectetur Illum 3"], ["updated_at", "2016-04-25 22:46:31.926627"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 4]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 4 AND "taggings"."tag_id" = 7) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 4], ["created_at", "2016-04-25 22:46:31.930270"], ["tag_id", 7], ["updated_at", "2016-04-25 22:46:31.930270"]]
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 4 AND "taggings"."tag_id" = 1) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 4], ["created_at", "2016-04-25 22:46:31.931858"], ["tag_id", 1], ["updated_at", "2016-04-25 22:46:31.931858"]]
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 4 AND "taggings"."tag_id" = 9) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 4], ["created_at", "2016-04-25 22:46:31.933162"], ["tag_id", 9], ["updated_at", "2016-04-25 22:46:31.933162"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE ("articles"."title" = 'Facilis Autem Voluptatem Facere Consectetur Illum 3' AND "articles"."id" != 4) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "articles" SET "created_at" = ?, "updated_at" = ? WHERE "articles"."id" = 4  [["created_at", "2016-04-14 07:46:31.926627"], ["updated_at", "2016-04-25 22:46:31.935582"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 4], ["author_name", "Rudolph Schumm"], ["body", "Repudiandae corrupti ab vel quo non tenetur. Porro debitis impedit iusto nesciunt. Aut consequuntur voluptas sunt eius. Consectetur doloremque vel fugiat. In autem iste dolorem repellendus."], ["created_at", "2016-04-16 07:46:31.926627"], ["updated_at", "2016-04-25 22:46:31.937967"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 4], ["author_name", "Ardella Wolff"], ["body", "Dolore incidunt voluptas sed et quia sint. Ut magni nam omnis distinctio dicta excepturi. In ex sint consequatur nisi quis. Reiciendis vero pariatur aut provident rem et. Aspernatur saepe quas vel enim dolores voluptatibus."], ["created_at", "2016-04-17 07:46:31.926627"], ["updated_at", "2016-04-25 22:46:31.940106"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Et Aut Non Sit Quasi Rerum 4' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "articles" ("author_id", "body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["author_id", 10], ["body", "Et molestias dolorem alias dolore corporis quod et. Quod sunt repudiandae numquam. Alias quia aut."], ["created_at", "2016-04-25 22:46:31.943185"], ["title", "Et Aut Non Sit Quasi Rerum 4"], ["updated_at", "2016-04-25 22:46:31.943185"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 5]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 5 AND "taggings"."tag_id" = 1) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 5], ["created_at", "2016-04-25 22:46:31.946698"], ["tag_id", 1], ["updated_at", "2016-04-25 22:46:31.946698"]]
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 5 AND "taggings"."tag_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 5], ["created_at", "2016-04-25 22:46:31.948253"], ["tag_id", 2], ["updated_at", "2016-04-25 22:46:31.948253"]]
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 5 AND "taggings"."tag_id" = 3) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 5], ["created_at", "2016-04-25 22:46:31.949593"], ["tag_id", 3], ["updated_at", "2016-04-25 22:46:31.949593"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE ("articles"."title" = 'Et Aut Non Sit Quasi Rerum 4' AND "articles"."id" != 5) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "articles" SET "created_at" = ?, "updated_at" = ? WHERE "articles"."id" = 5  [["created_at", "2016-04-13 10:46:31.943185"], ["updated_at", "2016-04-25 22:46:31.953643"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 5], ["author_name", "Rhiannon Hansen"], ["body", "Ab odit quae veritatis est distinctio saepe. Tempora et maiores. Vitae blanditiis officia deleniti architecto tenetur. At quaerat id exercitationem rerum. Aut debitis rerum ea ut odio dignissimos quibusdam."], ["created_at", "2016-04-15 18:46:31.943185"], ["updated_at", "2016-04-25 22:46:31.957679"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 5], ["author_name", "Mac Weber"], ["body", "Ut ipsam repudiandae laborum odio. Doloremque corrupti voluptas reiciendis omnis et quaerat et. Distinctio vel occaecati voluptatem consectetur pariatur. Corrupti nulla earum nihil voluptas laudantium sint repudiandae. Minus atque officia."], ["created_at", "2016-04-14 19:46:31.943185"], ["updated_at", "2016-04-25 22:46:31.960978"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 5], ["author_name", "Dr. Carlee Renner"], ["body", "Earum quaerat aut accusamus sint quas odio. Quisquam rerum autem aperiam excepturi at est. Est consequuntur ut soluta iusto sed dolore qui. Totam ea ullam mollitia deserunt ab."], ["created_at", "2016-04-17 06:46:31.943185"], ["updated_at", "2016-04-25 22:46:31.964170"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 5], ["author_name", "Miss Tremaine Grady"], ["body", "Accusamus eius provident ipsa et. Et commodi eius. Dolore quo aut eos consequatur facilis. Sit consequatur qui minus. Qui aut accusamus odio."], ["created_at", "2016-04-15 00:46:31.943185"], ["updated_at", "2016-04-25 22:46:31.967808"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Ut Quasi Sed Quam Iste Id 5' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("author_id", "body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["author_id", 1], ["body", "Provident velit quia et enim deserunt. Rerum neque dolorem iusto nostrum. Ut iusto reprehenderit ipsam accusantium est est consequatur. Qui recusandae incidunt omnis quisquam culpa blanditiis."], ["created_at", "2016-04-25 22:46:31.971435"], ["title", "Ut Quasi Sed Quam Iste Id 5"], ["updated_at", "2016-04-25 22:46:31.971435"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 6]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 6 AND "taggings"."tag_id" = 7) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 6], ["created_at", "2016-04-25 22:46:31.975094"], ["tag_id", 7], ["updated_at", "2016-04-25 22:46:31.975094"]]
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 6 AND "taggings"."tag_id" = 6) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 6], ["created_at", "2016-04-25 22:46:31.976665"], ["tag_id", 6], ["updated_at", "2016-04-25 22:46:31.976665"]]
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 6 AND "taggings"."tag_id" = 10) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 6], ["created_at", "2016-04-25 22:46:31.978061"], ["tag_id", 10], ["updated_at", "2016-04-25 22:46:31.978061"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE ("articles"."title" = 'Ut Quasi Sed Quam Iste Id 5' AND "articles"."id" != 6) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "articles" SET "created_at" = ?, "updated_at" = ? WHERE "articles"."id" = 6  [["created_at", "2016-04-13 04:46:31.971435"], ["updated_at", "2016-04-25 22:46:31.981757"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 6], ["author_name", "Chris Quigley"], ["body", "Perspiciatis consequatur tempore ut in ut autem. Et eveniet dolorum autem. Labore perspiciatis nobis. Exercitationem quo in mollitia impedit error incidunt. Accusamus id quia ut qui."], ["created_at", "2016-04-15 18:46:31.971435"], ["updated_at", "2016-04-25 22:46:31.985537"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 6], ["author_name", "Camren Reinger"], ["body", "Ipsa non autem perspiciatis et. Est aperiam tenetur minima exercitationem voluptate praesentium. Ut aperiam et deserunt. Perspiciatis est voluptatem. Aliquid voluptatem aperiam."], ["created_at", "2016-04-17 02:46:31.971435"], ["updated_at", "2016-04-25 22:46:31.989096"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 6], ["author_name", "Amie Rau"], ["body", "Soluta commodi illo eaque omnis magnam quo. Qui deserunt provident in assumenda dolorem dolorem pariatur. Consectetur esse voluptas molestiae nisi natus est accusamus. Minima dicta expedita ducimus."], ["created_at", "2016-04-16 09:46:31.971435"], ["updated_at", "2016-04-25 22:46:31.992140"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.3ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Temporibus Maxime Aliquid Est Eaque Odit 6' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("author_id", "body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?, ?)  [["author_id", 10], ["body", "Distinctio non sunt dicta quod. Ut reprehenderit quo dolorem vel et. Sint modi ipsa ea quia. In ratione mollitia maxime et tempora earum. Nihil facere vero et delectus sapiente."], ["created_at", "2016-04-25 22:46:31.996848"], ["title", "Temporibus Maxime Aliquid Est Eaque Odit 6"], ["updated_at", "2016-04-25 22:46:31.996848"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?  [["article_id", 7]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 7 AND "taggings"."tag_id" = 7) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 7], ["created_at", "2016-04-25 22:46:32.001015"], ["tag_id", 7], ["updated_at", "2016-04-25 22:46:32.001015"]]
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 7 AND "taggings"."tag_id" = 10) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 7], ["created_at", "2016-04-25 22:46:32.002586"], ["tag_id", 10], ["updated_at", "2016-04-25 22:46:32.002586"]]
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 7 AND "taggings"."tag_id" = 5) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 7], ["created_at", "2016-04-25 22:46:32.003854"], ["tag_id", 5], ["updated_at", "2016-04-25 22:46:32.003854"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE ("articles"."title" = 'Temporibus Maxime Aliquid Est Eaque Odit 6' AND "articles"."id" != 7) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "articles" SET "created_at" = ?, "updated_at" = ? WHERE "articles"."id" = 7[0m  [["created_at", "2016-04-15 21:46:31.996848"], ["updated_at", "2016-04-25 22:46:32.006027"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 7], ["author_name", "Sylvia O'Connell"], ["body", "Incidunt ut aliquid alias et velit velit. Eius maiores sit quidem saepe molestiae. Error quisquam delectus quos."], ["created_at", "2016-04-16 17:46:31.996848"], ["updated_at", "2016-04-25 22:46:32.008212"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 7], ["author_name", "Vita Klein"], ["body", "Itaque consequatur nam quos illum consequuntur blanditiis accusamus. Sint non dolorem. Aut voluptates sequi voluptas exercitationem. Aut qui iure eum velit. Asperiores sit veritatis impedit."], ["created_at", "2016-04-19 00:46:31.996848"], ["updated_at", "2016-04-25 22:46:32.010639"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 7], ["author_name", "Ms. Rene Schneider"], ["body", "Reprehenderit est alias consequatur et. Officiis possimus ratione dicta libero. Est sit voluptates."], ["created_at", "2016-04-18 22:46:31.996848"], ["updated_at", "2016-04-25 22:46:32.012717"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 7], ["author_name", "Emory Klocko"], ["body", "Et minima iste officia. Incidunt optio ut. Ipsa iusto quam."], ["created_at", "2016-04-18 13:46:31.996848"], ["updated_at", "2016-04-25 22:46:32.014857"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Quis Qui Esse Suscipit Sit Quis 7' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "articles" ("author_id", "body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?, ?)  [["author_id", 3], ["body", "Voluptatibus alias maiores autem. Voluptatem et unde maxime iste. Hic eos ex eaque placeat quam temporibus qui."], ["created_at", "2016-04-25 22:46:32.018362"], ["title", "Quis Qui Esse Suscipit Sit Quis 7"], ["updated_at", "2016-04-25 22:46:32.018362"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mTag Load (0.2ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?  [["article_id", 8]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 8 AND "taggings"."tag_id" = 5) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 8], ["created_at", "2016-04-25 22:46:32.024766"], ["tag_id", 5], ["updated_at", "2016-04-25 22:46:32.024766"]]
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 8 AND "taggings"."tag_id" = 8) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 8], ["created_at", "2016-04-25 22:46:32.027684"], ["tag_id", 8], ["updated_at", "2016-04-25 22:46:32.027684"]]
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 8 AND "taggings"."tag_id" = 2) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 8], ["created_at", "2016-04-25 22:46:32.029880"], ["tag_id", 2], ["updated_at", "2016-04-25 22:46:32.029880"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.2ms)[0m  SELECT  1 AS one FROM "articles"  WHERE ("articles"."title" = 'Quis Qui Esse Suscipit Sit Quis 7' AND "articles"."id" != 8) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "articles" SET "created_at" = ?, "updated_at" = ? WHERE "articles"."id" = 8[0m  [["created_at", "2016-04-18 22:46:32.018362"], ["updated_at", "2016-04-25 22:46:32.032972"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 8], ["author_name", "Miss Kattie Hauck"], ["body", "Corporis ipsam repellendus omnis asperiores. Aut dolorem repellat nostrum harum ut provident. Ipsam inventore suscipit assumenda sapiente quis sint perspiciatis. Commodi exercitationem voluptatum et laborum est vel."], ["created_at", "2016-04-20 00:46:32.018362"], ["updated_at", "2016-04-25 22:46:32.035742"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 8], ["author_name", "Carmine Rice"], ["body", "Et mollitia est incidunt. Quia tempore repellat corrupti et qui mollitia. Ex sequi laborum. Dicta alias eius qui esse inventore."], ["created_at", "2016-04-22 06:46:32.018362"], ["updated_at", "2016-04-25 22:46:32.037982"]]
+  [1m[35m (1.2ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 8], ["author_name", "Jakob O'Connell"], ["body", "Est sit id qui porro sequi doloremque. Dolorem quia modi officia. Et voluptatem quaerat."], ["created_at", "2016-04-21 11:46:32.018362"], ["updated_at", "2016-04-25 22:46:32.040560"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 8], ["author_name", "Zella Lubowitz III"], ["body", "Similique quas eos. Voluptate omnis rerum. Maxime tempora rerum ratione."], ["created_at", "2016-04-22 16:46:32.018362"], ["updated_at", "2016-04-25 22:46:32.042744"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 8], ["author_name", "Mrs. Rodolfo Schoen"], ["body", "Earum voluptatibus alias sed molestiae accusamus harum ipsum. Nihil velit enim dignissimos asperiores odit vitae. Distinctio accusamus veniam animi veritatis dolorum aspernatur consectetur. Odio autem veritatis iste. Eum nesciunt unde consequatur est."], ["created_at", "2016-04-21 12:46:32.018362"], ["updated_at", "2016-04-25 22:46:32.044921"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 8], ["author_name", "Alexandrine Sawayn"], ["body", "Dolores vel quia magnam sit. Tempora est amet. A est iure."], ["created_at", "2016-04-21 18:46:32.018362"], ["updated_at", "2016-04-25 22:46:32.046949"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mAuthor Load (0.2ms)[0m  [1mSELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Tempore Et Deleniti Asperiores Hic Praesentium 8' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "articles" ("author_id", "body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?, ?)  [["author_id", 3], ["body", "Qui occaecati est commodi cupiditate minus ex. In impedit non. Magnam molestias dolore sapiente."], ["created_at", "2016-04-25 22:46:32.050454"], ["title", "Tempore Et Deleniti Asperiores Hic Praesentium 8"], ["updated_at", "2016-04-25 22:46:32.050454"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?  [["article_id", 9]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 9 AND "taggings"."tag_id" = 1) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 9], ["created_at", "2016-04-25 22:46:32.054056"], ["tag_id", 1], ["updated_at", "2016-04-25 22:46:32.054056"]]
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 9 AND "taggings"."tag_id" = 9) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 9], ["created_at", "2016-04-25 22:46:32.055499"], ["tag_id", 9], ["updated_at", "2016-04-25 22:46:32.055499"]]
+  [1m[35mTagging Exists (0.1ms)[0m  SELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 9 AND "taggings"."tag_id" = 6) LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 9], ["created_at", "2016-04-25 22:46:32.056787"], ["tag_id", 6], ["updated_at", "2016-04-25 22:46:32.056787"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE ("articles"."title" = 'Tempore Et Deleniti Asperiores Hic Praesentium 8' AND "articles"."id" != 9) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "articles" SET "created_at" = ?, "updated_at" = ? WHERE "articles"."id" = 9[0m  [["created_at", "2016-04-16 06:46:32.050454"], ["updated_at", "2016-04-25 22:46:32.059271"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 9], ["author_name", "Dr. Loraine Wyman"], ["body", "Distinctio est hic iusto. Incidunt est veritatis dolores. Quis maxime ea reprehenderit non."], ["created_at", "2016-04-17 13:46:32.050454"], ["updated_at", "2016-04-25 22:46:32.061618"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 9], ["author_name", "Cecilia Barrows"], ["body", "Quam aut ea consequatur. Necessitatibus exercitationem ullam fugiat est non a nulla. Qui sunt autem architecto voluptas. Nulla ut eos officia sint nesciunt."], ["created_at", "2016-04-16 20:46:32.050454"], ["updated_at", "2016-04-25 22:46:32.064037"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 9], ["author_name", "Maryse Abernathy I"], ["body", "Dolorem nam rem aliquam iure numquam corrupti. Deleniti ut blanditiis sint eaque ut beatae qui. Sed magni rem temporibus architecto. Porro eum voluptas perferendis. Voluptatem et ut aspernatur nihil."], ["created_at", "2016-04-20 08:46:32.050454"], ["updated_at", "2016-04-25 22:46:32.066393"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mAuthor Load (0.2ms)[0m  SELECT  "authors".* FROM "authors"   ORDER BY RANDOM() LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mArticle Exists (0.1ms)[0m  SELECT  1 AS one FROM "articles"  WHERE "articles"."title" = 'Quam Quia Sapiente Facilis Quae Sit 9' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "articles" ("author_id", "body", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["author_id", 7], ["body", "Blanditiis accusantium eligendi. Voluptas ea voluptatem. Exercitationem cumque dolorem saepe. Sit rerum nemo tenetur corrupti eligendi in voluptatibus."], ["created_at", "2016-04-25 22:46:32.070211"], ["title", "Quam Quia Sapiente Facilis Quae Sit 9"], ["updated_at", "2016-04-25 22:46:32.070211"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 10]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 10 AND "taggings"."tag_id" = 1) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 10], ["created_at", "2016-04-25 22:46:32.074065"], ["tag_id", 1], ["updated_at", "2016-04-25 22:46:32.074065"]]
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 10 AND "taggings"."tag_id" = 7) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 10], ["created_at", "2016-04-25 22:46:32.075521"], ["tag_id", 7], ["updated_at", "2016-04-25 22:46:32.075521"]]
+  [1m[36mTagging Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "taggings"  WHERE ("taggings"."article_id" = 10 AND "taggings"."tag_id" = 10) LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "taggings" ("article_id", "created_at", "tag_id", "updated_at") VALUES (?, ?, ?, ?)  [["article_id", 10], ["created_at", "2016-04-25 22:46:32.076826"], ["tag_id", 10], ["updated_at", "2016-04-25 22:46:32.076826"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "articles"  WHERE ("articles"."title" = 'Quam Quia Sapiente Facilis Quae Sit 9' AND "articles"."id" != 10) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "articles" SET "created_at" = ?, "updated_at" = ? WHERE "articles"."id" = 10  [["created_at", "2016-04-10 19:46:32.070211"], ["updated_at", "2016-04-25 22:46:32.079307"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 10], ["author_name", "Donny Schmitt"], ["body", "Est eos ducimus voluptatem dolores repudiandae eum et. Qui et fuga. Atque nihil qui quis occaecati dolores."], ["created_at", "2016-04-12 00:46:32.070211"], ["updated_at", "2016-04-25 22:46:32.081693"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 10], ["author_name", "Terence Casper IV"], ["body", "Repellendus dolores laborum ipsa cupiditate maxime. Quaerat porro quia quod. Et quam eum suscipit aspernatur beatae nihil omnis. Repellendus ratione eos totam autem eos. Nostrum ratione aliquid ducimus consequatur voluptates dolores consequuntur."], ["created_at", "2016-04-13 12:46:32.070211"], ["updated_at", "2016-04-25 22:46:32.086238"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["article_id", 10], ["author_name", "Litzy Walsh"], ["body", "Sunt qui et. Minus sint voluptas dignissimos perspiciatis in quis neque. Consequatur corrupti sit voluptatem et veniam soluta. Consequatur libero inventore. Iure ab eveniet voluptatem accusantium eum nam consequuntur."], ["created_at", "2016-04-12 16:46:32.070211"], ["updated_at", "2016-04-25 22:46:32.089981"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "comments" ("article_id", "author_name", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 10], ["author_name", "Joanny Boehm PhD"], ["body", "Iure esse corporis tenetur. Voluptatem quo culpa repellendus et. Aperiam voluptate vitae. Rerum repellendus praesentium voluptas sed. Voluptates veniam possimus aut reiciendis saepe voluptatem."], ["created_at", "2016-04-11 10:46:32.070211"], ["updated_at", "2016-04-25 22:46:32.093134"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/" for 127.0.0.1 at 2016-04-25 16:26:57 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by DashboardController#show as HTML
+  [1m[35m (0.5ms)[0m  SELECT COUNT(*) FROM "articles"
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 4]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 5]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 6]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 7]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 8]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 9]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 10]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mComment Load (0.3ms)[0m  SELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  Rendered dashboard/show.html.erb within layouts/application (12.2ms)
+Completed 200 OK in 279ms (Views: 237.7ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-04-25 16:27:44 -0700
+Processing by DashboardController#show as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 4]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 5]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 6]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 7]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 8]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 9]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 10]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"[0m
+  [1m[35mComment Load (0.3ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mComment Load (0.3ms)[0m  SELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  Rendered dashboard/show.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 69ms (Views: 56.0ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-04-25 16:27:46 -0700
+Processing by DashboardController#show as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 4]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 5]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 6]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 7]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 8]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 9]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 10]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"[0m
+  [1m[35mComment Load (0.4ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36mArticle Load (0.4ms)[0m  [1mSELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  Rendered dashboard/show.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 59ms (Views: 45.8ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-04-25 16:27:49 -0700
+Processing by DashboardController#show as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 4]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 5]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 6]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 7]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 8]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 9]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 10]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  Rendered dashboard/show.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 49ms (Views: 38.1ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-04-25 16:28:04 -0700
+Processing by DashboardController#show as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "articles"
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 4]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 5]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 6]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 7]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 8]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 9]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 10]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"[0m
+  [1m[35mComment Load (0.5ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  Rendered dashboard/show.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 59ms (Views: 46.6ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-04-25 16:28:05 -0700
+Processing by DashboardController#show as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35mArticle Load (0.3ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 4]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 5]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 6]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 7]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 8]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 9]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 10]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  Rendered dashboard/show.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 52ms (Views: 40.0ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-04-25 16:28:23 -0700
+Processing by DashboardController#show as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 4]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 5]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 6]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 7]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 8]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 9]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 10]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mComment Load (0.3ms)[0m  SELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  Rendered dashboard/show.html.erb within layouts/application (10.1ms)
+Completed 200 OK in 57ms (Views: 45.4ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-04-25 16:29:05 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by DashboardController#show as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 4]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 5]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 6]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 7]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 8]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 9]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 10]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  Rendered dashboard/show.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 138ms (Views: 97.4ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-04-25 16:29:14 -0700
+Processing by DashboardController#show as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "articles"
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 4]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 5]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 6]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 7]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 8]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 9]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 10]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"[0m
+  [1m[35mComment Load (0.3ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  Rendered dashboard/show.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 59ms (Views: 43.1ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-04-25 16:29:17 -0700
+Processing by DashboardController#show as HTML
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "articles"
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 4]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 5]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 6]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 7]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 8]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 9]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 10]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments"[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments"
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles"   ORDER BY created_at DESC LIMIT 5[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT  "comments".* FROM "comments"   ORDER BY created_at DESC LIMIT 5
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  Rendered dashboard/show.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 52ms (Views: 41.1ms | ActiveRecord: 2.0ms)
